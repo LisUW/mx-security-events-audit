@@ -18,7 +18,8 @@ missing <- pkgs[!pkgs %in% rownames(installed.packages())]
 if (length(missing) > 0) {
   install.packages(missing, repos = "https://cloud.r-project.org")
 }
-
+```
+```{r main}
 library(tibble)
 library(dplyr)
 library(readr)
@@ -65,3 +66,4 @@ event
 # --- Export reproducible output ---
 dir.create("data/processed", recursive = TRUE, showWarnings = FALSE)
 write_csv(event, "data/processed/events_2026-02-22.csv")
+```
