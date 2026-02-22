@@ -13,7 +13,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
-pkgs <- c("tibble", "dplyr", "readr", "stringr", "lubridate")
+pkgs <- c("tibble", "dplyr", "readr", "stringr", "lubridate", "jsonlite")
 missing <- pkgs[!pkgs %in% rownames(installed.packages())]
 if (length(missing) > 0) {
   install.packages(missing, repos = "https://cloud.r-project.org")
@@ -24,7 +24,7 @@ library(dplyr)
 library(readr)
 library(stringr)
 library(lubridate)
-```
+library(jsonlite)
 # --- Primary source (preserved verbatim) ---
 comunicado_texto <- paste(
 "Se hace del conocimiento a la opinión pública que, con trabajos de inteligencia militar central, del Centro Nacional de Inteligencia y de la Fiscalía General de República (FEMDO), Fuerzas Especiales del Ejército Mexicano planearon y ejecutaron una operación en Tapalpa, Jal., en la que intervinieron diversas aeronaves de la Fuerza Aérea y la Fuerza Especial de Reacción Inmediata de la Guardia Nacional para lograr la detención de Ruben “N” (a) Mencho.",
@@ -42,7 +42,7 @@ comunicado_texto <- paste(
 "Con estas acciones la Secretaría de la Defensa Nacional refrenda su compromiso de contribuir al fortalecimiento de la seguridad de México.",
 sep = "\n"
 )
-# Print source text
+
 cat(comunicado_texto)
 
 # --- Structured event data ---

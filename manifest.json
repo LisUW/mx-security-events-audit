@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "locale": "C",
+  "platform": "4.5.2",
+  "metadata": {
+    "appmode": "rmd-static",
+    "primary_rmd": "index.Rmd",
+    "primary_html": null,
+    "content_category": null,
+    "has_parameters": false
+  },
+  "packages": null,
+  "files": {
+    "index.Rmd": {
+      "checksum": "303ae834521f2ced9041db697657e1e5"
+    },
+    "README.md": {
+      "checksum": "abc398a598d7a2c160c3fc7d8dc1845b"
+    }
+  },
+  "users": null
+}
