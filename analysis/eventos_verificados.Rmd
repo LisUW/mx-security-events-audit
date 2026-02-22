@@ -1,0 +1,88 @@
+---
+title: "verificaMX-events: Auditable Security Events in Mexico"
+author: "Lisette Lurker"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    theme: flatly
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+## Overview
+
+This report presents verified security events in Mexico derived exclusively from
+official sources (e.g., SEDENA communiqués). No social-media reports, inferred
+coordinates, or speculative data are included.
+
+Verification levels used in this dataset:
+
+| Level | Meaning |
+|---|---|
+| `verified_official` | Confirmed by an official government communiqué |
+| `corroborated` | Confirmed by two or more independent credible sources |
+| `unverified` | Single non-official source; included for completeness only |
+
+---
+
+## Load data
+
+```{r load-data}
+source("../scripts/load_events.R")
+
+events <- load_events("../data/processed/events_verified.csv")
+```
+
+## Summary statistics
+
+```{r summary}
+cat("Total events:", nrow(events), "\n")
+cat("Date range:", format(min(events$date)), "to", format(max(events$date)), "\n")
+cat("\nEvents by verification level:\n")
+print(table(events$verification_level))
+cat("\nEvents by state:\n")
+print(table(events$state))
+```
+
+## Event table
+
+```{r event-table}
+display_cols <- c(
+  "event_id", "date", "municipality", "state",
+  "event_type", "verification_level", "source_type"
+)
+knitr::kable(events[, display_cols], row.names = FALSE,
+             caption = "Verified security events")
+```
+
+## Source auditability
+
+The full original text is preserved for each event, enabling independent verification.
+
+```{r source-text, results='asis'}
+for (i in seq_len(nrow(events))) {
+  cat(sprintf("\n### Event %s — %s, %s (%s)\n\n",
+              events$event_id[i],
+              events$municipality[i],
+              events$state[i],
+              events$date[i]))
+  txt <- load_source_text(events$source_id[i],
+                          raw_dir = "../data/raw")
+  cat("```\n", txt, "\n```\n\n", sep = "")
+}
+```
+
+## Methodology notes
+
+- Only official communiqués and corroborated reports are included.
+- Geographic information is taken directly from source text; no coordinates are
+  inferred from maps or third-party databases.
+- Each event links to a `source_id` that maps to a file in `data/raw/`.
+- This report is fully reproducible: re-knitting this document from the raw data
+  will produce identical results.
