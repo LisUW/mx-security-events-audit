@@ -1,0 +1,67 @@
+---
+title: "mx-security-events-audit"
+subtitle: "Auditable, reproducible event dataset from official sources (Mexico)"
+author: "Lisette Lurker"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+
+pkgs <- c("tibble", "dplyr", "readr", "stringr", "lubridate")
+missing <- pkgs[!pkgs %in% rownames(installed.packages())]
+if (length(missing) > 0) {
+  install.packages(missing, repos = "https://cloud.r-project.org")
+}
+
+library(tibble)
+library(dplyr)
+library(readr)
+library(stringr)
+library(lubridate)
+```
+# --- Primary source (preserved verbatim) ---
+comunicado_texto <- paste(
+"Se hace del conocimiento a la opinión pública que, con trabajos de inteligencia militar central, del Centro Nacional de Inteligencia y de la Fiscalía General de República (FEMDO), Fuerzas Especiales del Ejército Mexicano planearon y ejecutaron una operación en Tapalpa, Jal., en la que intervinieron diversas aeronaves de la Fuerza Aérea y la Fuerza Especial de Reacción Inmediata de la Guardia Nacional para lograr la detención de Ruben “N” (a) Mencho.",
+"",
+"Durante esta operación, personal militar fue atacado, por lo que en defensa de su integridad repelieron la agresión, resultando cuatro integrantes del grupo delictivo “CJNG” fallecidos en el lugar y tres heridos de gravedad, quienes perdieron la vida durante su traslado vía aérea a la Ciudad de México; entre estos últimos se encuentra Ruben “N” (a) Mencho, sin embargo, serán las autoridades correspondientes las que se encargarán de las actividades periciales para su identificación.",
+"",
+"Además de lo anterior, fueron detenidos otros dos integrantes de esta organización delictiva y fue asegurado diverso armamento y vehículos blindados, entre los que se encuentran lanzacohetes capaces de derribar aeronaves y destruir vehículos blindados.",
+"",
+"Lamentablemente durante esta acción militar, tres elementos de la institución resultaron heridos, quienes de igual forma fueron trasladados a instalaciones sanitarias de la Ciudad de México, para su atención médica de urgencia.",
+"",
+"Cabe hacer mención que, para la ejecución de esta operación, además de los trabajos de inteligencia militar central, dentro del marco de coordinación y cooperación bilateral con los EUA, se contó con información complementaria por parte de autoridades de ese país.",
+"",
+"En estos momentos se están concentrando elementos de la Guardia Nacional y tropas del Ejército del centro del país y estados aledaños a Jalisco, para reforzar la seguridad de esta entidad federativa.",
+"",
+"Con estas acciones la Secretaría de la Defensa Nacional refrenda su compromiso de contribuir al fortalecimiento de la seguridad de México.",
+sep = "\n"
+)
+# Print source text
+cat(comunicado_texto)
+
+# --- Structured event data ---
+event <- tibble(
+  event_id = "MX-SEDENA-2026-02-22-001",
+  date_event = as.Date("2026-02-22"),
+  state = "Jalisco",
+  municipality = "Tapalpa",
+  event_type = "Military operation / armed confrontation",
+  fatalities_on_site = 4,
+  fatalities_during_transfer = 3,
+  detainees = 2,
+  institution_personnel_injured = 3,
+  cooperation_USA = TRUE,
+  source = "Official SEDENA communiqué"
+)
+
+event
+
+# --- Export reproducible output ---
+dir.create("data/processed", recursive = TRUE, showWarnings = FALSE)
+write_csv(event, "data/processed/events_2026-02-22.csv")
