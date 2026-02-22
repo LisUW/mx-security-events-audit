@@ -13,19 +13,26 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
-pkgs <- c("tibble", "dplyr", "readr", "stringr", "lubridate", "jsonlite")
+pkgs <- c(
+  "knitr", "rmarkdown",
+  "tibble", "dplyr", "readr", "stringr", "lubridate", "jsonlite"
+)
+
 missing <- pkgs[!pkgs %in% rownames(installed.packages())]
 if (length(missing) > 0) {
   install.packages(missing, repos = "https://cloud.r-project.org")
 }
-```
-```{r main}
+
+library(knitr)
+library(rmarkdown)
 library(tibble)
 library(dplyr)
 library(readr)
 library(stringr)
 library(lubridate)
 library(jsonlite)
+```
+```{r main}
 # --- Primary source (preserved verbatim) ---
 comunicado_texto <- paste(
 "Se hace del conocimiento a la opinión pública que, con trabajos de inteligencia militar central, del Centro Nacional de Inteligencia y de la Fiscalía General de República (FEMDO), Fuerzas Especiales del Ejército Mexicano planearon y ejecutaron una operación en Tapalpa, Jal., en la que intervinieron diversas aeronaves de la Fuerza Aérea y la Fuerza Especial de Reacción Inmediata de la Guardia Nacional para lograr la detención de Ruben “N” (a) Mencho.",
