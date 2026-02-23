@@ -74,3 +74,35 @@ event
 dir.create("data/processed", recursive = TRUE, showWarnings = FALSE)
 write_csv(event, "data/processed/events_2026-02-22.csv")
 ```
+```{=html}
+<section>
+  <h2>📹 Cámaras en vivo – México (feeds abiertos)</h2>
+
+  <h3>CDMX – Centro / Zona urbana</h3>
+  <iframe 
+    src="https://www.webcamtaxi.com/en/mexico/mexico-city.html"
+    width="640" 
+    height="360" 
+    loading="lazy"
+    style="border:none;">
+  </iframe>
+
+  <h3>Guadalajara – Glorieta La Minerva</h3>
+  <iframe 
+    src="https://www.earthtv.com/en/webcam/guadalajara-minerva-roundabout"
+    width="640" 
+    height="360" 
+    loading="lazy"
+    style="border:none;">
+  </iframe>
+
+  <h3>Cabo San Lucas – Vista urbana</h3>
+  <iframe 
+    src="https://www.skylinewebcams.com/en/webcam/mexico/baja-california-sur/cabo-san-lucas.html"
+    width="640" 
+    height="360" 
+    loading="lazy"
+    style="border:none;">
+  </iframe>
+</section>
+```
