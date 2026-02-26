@@ -1,0 +1,2 @@
+event_id,date,municipality,state,event_type,verification_level,source_type,source_id,detainees,weapons_seized,military_casualties,civilian_casualties,notes
+EVT-2026-0001,2026-02-22,Tapalpa,Jalisco,military_operation,verified_official,official_communique,sedena_tapalpa_20260222,4,5,0,0,Operativo conjunto Ejército-Guardia Nacional; armamento asegurado incluye 3 fusiles de asalto y 2 pistolas; sin bajas militares; detenidos puestos a disposición del Ministerio Público Federal

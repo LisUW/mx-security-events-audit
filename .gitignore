@@ -1,0 +1,10 @@
+# Rendered report outputs (regenerate with rmarkdown::render)
+outputs/*.html
+outputs/*.pdf
+
+# R session and cache files
+.Rhistory
+.RData
+.Rproj.user/
+*_cache/
+*_files/
